@@ -5,6 +5,8 @@ printNumber(num aNumber)
   print('After incrementing, the number is $aNumber.');
 }
 
+String evenOrOdd(int number) => number % 2 == 0 ? 'Even' : 'Odd';
+
 doubleExamples() {
   // more precision than the Dart double type can handle
   var pi = 3.1415926535897932384626433832;

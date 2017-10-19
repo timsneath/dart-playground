@@ -1,4 +1,5 @@
 main() {
+
   var ints = [1, 2, 3];
   var fibonacci = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 
@@ -16,7 +17,7 @@ main() {
   print(tempInts.hashCode == ints.hashCode); // different object
   tempInts.addAll(ints);
   ints = tempInts;
-  
+
   ints.addAll([1, 2, 3]);
 
   ints.add(4);
@@ -26,9 +27,7 @@ main() {
   print('${ints[3]}');
 
   // cascade can be used like with / end with in VB
-  fibonacci
-  ..add(55 + 89)
-  ..add(89 + (55 + 89));
+  fibonacci..add(55 + 89)..add(89 + (55 + 89));
 
   print('\$fibonacci: $fibonacci');
 
@@ -38,6 +37,4 @@ main() {
 
   print(fibonacci.runtimeType);
   print(fibonacci2.runtimeType);
-
-  
 }
