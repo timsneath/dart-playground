@@ -24,8 +24,9 @@ bool validBraces(String braces) {
     }
   }
 
-  // if nothing failed, then all braces match
-  return true;
+    // if nothing failed and there's nothing left on the stack, 
+    // then all braces match
+    return (stack.length == 0);
 }
 
 bool validMirroredBraces(String braces) {
