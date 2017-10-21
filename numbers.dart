@@ -6,6 +6,26 @@ printNumber(num aNumber) {
 
 String evenOrOdd(int number) => number % 2 == 0 ? 'Even' : 'Odd';
 
+String ShowSequence(num n) {
+  String sequence;
+  num total = 0;
+
+  if (n < 0) {
+    return "${n}<0";
+  }
+
+  sequence = '0';
+  for (int i = 1; i <= n; i++) {
+    sequence += '+${i}';
+    total += i;
+  }
+  sequence += ' = ${total}';
+  return sequence;
+}
+
+//
+// try out various iterative / mapping techniques
+//
 int squareSum(List numbers) => numbers.isEmpty
     ? 0
     : numbers.map((x) => x * x).reduce((total, x) => total + x);
@@ -27,6 +47,8 @@ intExamples() {
   print(func([]));
   print(func([-1, -2]));
   print(func([-1, 0, 1]));
+
+  print(ShowSequence(-15));
 }
 
 doubleExamples() {
