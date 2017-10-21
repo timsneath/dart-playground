@@ -29,16 +29,6 @@ bool validBraces(String braces) {
     return (stack.length == 0);
 }
 
-bool validMirroredBraces(String braces) {
-  Queue queue = new Queue.from(braces.split(''));
-  while (queue.length > 1) {
-    if (!bracesMatch(queue.removeFirst(), queue.removeLast())) return false;
-  }
-
-  // braces are matched unless there is an odd number of characters
-  return queue.length == 0;
-}
-
 main() {
   String s = '{(((){}({})(([{{}}]))))}';
   // String s = '';
