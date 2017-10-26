@@ -19,9 +19,9 @@ String brainLuck(String code, String input) {
         break;
 
       case '+': // increment byte at data pointer
-        if (dataPtr >= data.length) {
-          throw new Exception(
-              "Segmentation fault - attempted to read location ${dataPtr} from data buffer length ${data.length}");
+        while (dataPtr >= data.length) {
+          // add space as necessary so dataPtr doesn't overflow
+          data.add(0);
         }
         data[dataPtr]++;
         if (data[dataPtr] > 255) {
@@ -99,19 +99,19 @@ main() {
       () => expect(
           brainLuck(",+[-.,+]", "Codewars${new String.fromCharCode(255)}"),
           equals("Codewars")));
-  // test(
-  //     "hello world",
-  //     () => expect(
-  //         brainLuck(
-  //             '++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.',
-  //             ''),
-  //         equals('Hello World!')));
+  test(
+      "hello world",
+      () => expect(
+          brainLuck(
+              '++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.',
+              ''),
+          equals('Hello World!')));
 
-  // test("multiplying", () {
+  test("multiplying", () {
   List<int> nums = [r.nextInt(sqrt(255).toInt()), r.nextInt(sqrt(255).toInt())];
   expect(
       brainLuck(',>,<[>[->+>+<<]>>[-<<+>>]<<<-]>>.',
           new String.fromCharCodes([nums[0], nums[1]])),
       new String.fromCharCode(nums[0] * nums[1]));
-  // });
+  });
 }
