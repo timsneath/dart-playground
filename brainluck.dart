@@ -23,6 +23,10 @@ String brainLuck(String code, String input) {
         break;
 
       case '+': // increment byte at data pointer
+        while (dataPtr >= data.length) {
+          // add space as necessary so dataPtr doesn't overflow
+          data.add(0);
+        }
         data[dataPtr]++;
         if (data[dataPtr] > 255) {
           data[dataPtr] = 0;
@@ -49,7 +53,6 @@ String brainLuck(String code, String input) {
           // add space as necessary so dataPtr doesn't overflow
           data.add(0);
         }
-        // TODO - convert from UTF-16 to ASCII?
         data[dataPtr] = input[inputPtr++].codeUnitAt(0);
         break;
 
@@ -104,43 +107,48 @@ String brainLuck(String code, String input) {
 
 main() {
   Random r = new Random();
+
+  test(
+      "test echo until byte 255 encountered",
+      () => expect(
+          brainLuck(",+[-.,+]", "Codewars${new String.fromCharCode(255)}"),
+          equals("Codewars")));
+  test(
+      "hello world",
+      () => expect(
+          brainLuck(
+              '++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.',
+              ''),
+          equals('Hello World!')));
+
+  test("multiplying", () {
+    List<int> nums = [
+      r.nextInt(sqrt(255).toInt()),
+      r.nextInt(sqrt(255).toInt())
+    ];
+    expect(
+        brainLuck(',>,<[>[->+>+<<]>>[-<<+>>]<<<-]>>.',
+            new String.fromCharCodes([nums[0], nums[1]])),
+        new String.fromCharCode(nums[0] * nums[1]));
+  });
+
   var output, expectedOutput;
+  var testIteration = 0;
 
   do {
+        
     List<int> nums = [
       r.nextInt(sqrt(255).toInt()),
       r.nextInt(sqrt(255).toInt())
     ];
 
-    // List<int> nums = [0, 0];
-    print("Input: ${nums}");
     output = brainLuck(',>,<[>[->+>+<<]>>[-<<+>>]<<<-]>>.',
         new String.fromCharCodes([nums[0], nums[1]]));
     expectedOutput = new String.fromCharCode(nums[0] * nums[1]);
-    print("Output: ${output} | Expected output: ${expectedOutput}");
-  } while (output == expectedOutput);
 
-  // test(
-  //     "test echo until byte 255 encountered",
-  //     () => expect(
-  //         brainLuck(",+[-.,+]", "Codewars${new String.fromCharCode(255)}"),
-  //         equals("Codewars")));
-  // test(
-  //     "hello world",
-  //     () => expect(
-  //         brainLuck(
-  //             '++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.',
-  //             ''),
-  //         equals('Hello World!')));
-
-  // test("multiplying", () {
-  //   List<int> nums = [
-  //     r.nextInt(sqrt(255).toInt()),
-  //     r.nextInt(sqrt(255).toInt())
-  //   ];
-  //   expect(
-  //       brainLuck(',>,<[>[->+>+<<]>>[-<<+>>]<<<-]>>.',
-  //           new String.fromCharCodes([nums[0], nums[1]])),
-  //       new String.fromCharCode(nums[0] * nums[1]));
-  // });
+    if (output != expectedOutput) {
+      print("Input: ${nums}");
+      print("Output: ${output} | Expected output: ${expectedOutput}");
+    }
+  } while (output == expectedOutput && testIteration++ < 10);
 }
