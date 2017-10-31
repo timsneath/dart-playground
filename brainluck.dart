@@ -36,7 +36,8 @@ String brainLuck(String code, String input) {
       case '-': // decrement byte at data pointer
         if (dataPtr >= data.length) {
           throw new Exception(
-              "Segmentation fault at '-' instruction: attempted to read location ${dataPtr} from data buffer length ${data.length}");
+              "Segmentation fault at '-' instruction: attempted to read"
+              "location ${dataPtr} from data buffer length ${data.length}");
         }
         data[dataPtr]--;
         if (data[dataPtr] < 0) {
@@ -59,7 +60,8 @@ String brainLuck(String code, String input) {
       case '[': // if byte at data pointer is 0, jump to ']' + 1
         if (dataPtr >= data.length) {
           throw new Exception(
-              "Segmentation fault at '[' instruction - attempted to read location ${dataPtr} from data buffer length ${data.length}");
+              "Segmentation fault at '[' instruction - attempted to read"
+              "location ${dataPtr} from data buffer length ${data.length}");
         }
         if (data[dataPtr] == 0) {
           // find matching brace
@@ -71,7 +73,8 @@ String brainLuck(String code, String input) {
             instPtr++;
             if (instPtr >= code.length) {
               throw new Exception(
-                  "Segmentation fault - attempted to step beyond address ${code.length}.");
+                  "Segmentation fault - attempted to step beyond"
+                  "address ${code.length}.");
             }
           }
         }
@@ -117,7 +120,9 @@ main() {
       "hello world",
       () => expect(
           brainLuck(
-              '++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.',
+              '++++++++++[>+++++++>++++++++++>+++>+<<<<-]'
+              '>++.>+.+++++++..+++.>++.<<+++++++++++++++.'
+              '>.+++.------.--------.>+.',
               ''),
           equals('Hello World!')));
 
@@ -136,7 +141,6 @@ main() {
   var testIteration = 0;
 
   do {
-        
     List<int> nums = [
       r.nextInt(sqrt(255).toInt()),
       r.nextInt(sqrt(255).toInt())
