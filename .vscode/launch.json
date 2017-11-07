@@ -8,7 +8,7 @@
             "name": "Dart command line",
             "type": "dart-cli",
             "request": "launch",
-            "program": "${workspaceRoot}/brainluck.dart"
+            "program": "${workspaceRoot}/numbers.dart"
         }
     ]
 }

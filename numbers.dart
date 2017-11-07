@@ -1,3 +1,5 @@
+import 'dart:math';
+
 printNumber(num aNumber) {
   print('The number is $aNumber.');
   for (; aNumber < 1000; aNumber++);
@@ -58,6 +60,16 @@ doubleExamples() {
   print('π is even more roughly ${pi.toStringAsPrecision(3)}');
 }
 
+int largestNumberSequence(String digits) {
+  int largest = 0;
+
+  for (int idx = 0; idx < digits.length - 4; idx++) {
+    final current = int.parse(digits.substring(idx, idx + 5));
+    largest = max(largest, current);
+  }
+  return largest;
+}
+
 dateTimeExamples() {
   DateTime myBirth = new DateTime.utc(
     1973,
@@ -78,11 +90,13 @@ dateTimeExamples() {
 main() {
   var number = 42;
   printNumber(number);
-  print('Numbers are passed by value. The number is still $number.');
-  print("");
+  print('Numbers are passed by value. The number is still $number.\n');
   intExamples();
-  print("");
+  print('');
   doubleExamples();
-  print("");
+  print('');
   dateTimeExamples();
+  print('');
+  print('Largest number sequence: '
+      '${largestNumberSequence('543432345323542323577678')}');
 }
